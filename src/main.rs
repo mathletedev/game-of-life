@@ -71,9 +71,9 @@ impl EventHandler<GameError> for State {
 							+ self.grid[right][down] as u8
 							+ self.grid[i][down] as u8 + self.grid[left][down] as u8;
 
-					if self.grid[i][j] && (neighbors < 2 || neighbors > 3) {
-						coords.push((i, j));
-					} else if !self.grid[i][j] && neighbors == 3 {
+					if (self.grid[i][j] && (neighbors < 2 || neighbors > 3))
+						|| (!self.grid[i][j] && neighbors == 3)
+					{
 						coords.push((i, j));
 					}
 				}
@@ -141,7 +141,7 @@ impl EventHandler<GameError> for State {
 						y: 0.0,
 					},
 					Point2 {
-						x: i as f32 * CELL_SIZE.1,
+						x: i as f32 * CELL_SIZE.0,
 						y: WINDOW_SIZE.1,
 					},
 				],
